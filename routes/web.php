@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Auth\ProfileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +16,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::group(['middleware' => 'Admin:admins'], function () {
+    Route::get('/admin', function () {
+        return view('Admin.index');
+    });
+    Route::get('/logout', function () {
+        Auth::logout();
+        return back();
+    });
 
+    Route::get('admin/profile', [ProfileController::class, 'profile']);
+    Route::post('admin/profile', [ProfileController::class, 'updateProfile'])->name('profile.custom');
+
+
+});
+Route::group(['middleware'=>'guest'], function () {
+    // Login Routes
+    Route::get('admin/login', [LoginController::class, 'renderLogin']);
+    Route::post('admin/login', [LoginController::class, 'login'])->name('login.custom');
+
+    //---------------------------------------------------------------------------------------//
+});
 
 Route::get('lang/{lang}', function ($lang) {
 

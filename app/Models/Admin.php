@@ -35,10 +35,13 @@ class Admin extends Authenticatable
 
     public function setImageAttribute($image)
     {
+
         if (is_file($image)) {
             $imageFields = upload($image, 'admins');
             $this->attributes['image'] = $imageFields;
+
         }
+
     }
 
     public function setPasswordAttribute($password)
