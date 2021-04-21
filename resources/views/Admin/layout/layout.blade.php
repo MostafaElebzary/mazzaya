@@ -419,12 +419,25 @@
 
 
                                             </a>
-                                        @else
+                                        @elseif(session('lang') == 'ar')
                                             <a href="{{url('lang/en')}}" class="navi-link">
                                             <span class="symbol symbol-20 mr-3">
                                                  <img
                                                      src="{{asset('/dashboard/assets/media/flags/020-flag.svg')}}"
                                                      alt=""/>
+
+                                            </span>
+
+
+                                            </a>
+
+                                        @else
+                                            <a href="{{url('lang/ar')}}" class="navi-link">
+                                            <span class="symbol symbol-20 mr-3">
+
+                                                    <img
+                                                        src="{{asset('/dashboard/assets/media/flags/008-saudi-arabia.svg')}}"
+                                                        alt=""/>
 
                                             </span>
 

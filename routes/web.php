@@ -20,8 +20,8 @@ Route::group(['middleware' => 'Admin:admins'], function () {
     Route::get('/admin', function () {
         return view('Admin.index');
     });
-    Route::get('/logout', function () {
-        Auth::logout();
+    Route::get('admin/logout', function () {
+        Auth::guard('admins')->logout();
         return back();
     });
 

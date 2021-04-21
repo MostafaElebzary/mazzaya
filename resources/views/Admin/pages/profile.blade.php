@@ -120,7 +120,7 @@
                                         </div>
                                         <!--end::Group-->
                                         <!--begin::Group-->
-                                        <div class="form-group row">
+                                        <div class="form-group row"  >
                                             <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.name')}}</label>
                                             <div class="col-9">
                                                 <input name="name" class="form-control form-control-lg form-control-solid" type="text" value="{{$admin->name}}" required/>
