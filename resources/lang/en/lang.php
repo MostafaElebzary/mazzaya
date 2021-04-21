@@ -17,7 +17,7 @@ return [
     'password' => 'password',
     'save' => 'save',
     'back' => 'back',
-    'updated_successfully' => 'updated_successfully',
+    'updated_successfully' => 'updated successfully',
 
 
 

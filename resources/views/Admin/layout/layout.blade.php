@@ -13,9 +13,9 @@
     <link rel="shortcut icon" href="{{asset('dashboard/assets/media/logos/fav.png')}}"/>
 
 
-
     @if(session('lang') == "ar")
-        <link href="{{asset('dashboard/assets/plugins/custom/fullcalendar/fullcalendar.bundle.rtl.css')}}" rel="stylesheet"
+        <link href="{{asset('dashboard/assets/plugins/custom/fullcalendar/fullcalendar.bundle.rtl.css')}}"
+              rel="stylesheet"
               type="text/css"/>
         <link href="{{asset('dashboard/assets/plugins/global/plugins.bundle.rtl.css')}}" rel="stylesheet"
               type="text/css"/>
@@ -175,7 +175,6 @@
                         </li>
 
 
-
                     </ul>
                     <!--end::Menu Nav-->
                 </div>
@@ -294,13 +293,13 @@
                                                     <!--begin::Text-->
                                                     <div class="d-flex flex-column flex-grow-1 mr-2">
                                                         <a href="#"
-                                                           class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">اشعار مؤقت</a>
+                                                           class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1">اشعار
+                                                            مؤقت</a>
                                                     </div>
                                                     <!--end::Text-->
                                                     <span
                                                         class="label label-xl label-light label-inline my-lg-0 my-2 text-dark-50 font-weight-bolder">82</span>
                                                 </div>
-
 
 
                                             </div>
@@ -409,7 +408,7 @@
 
                                     <li class="navi-item">
                                         @if(session('lang') == 'en')
-                                        <a href="{{url('lang/ar')}}" class="navi-link">
+                                            <a href="{{url('lang/ar')}}" class="navi-link">
                                             <span class="symbol symbol-20 mr-3">
 
                                                     <img
@@ -419,7 +418,7 @@
                                             </span>
 
 
-                                        </a>
+                                            </a>
                                         @else
                                             <a href="{{url('lang/en')}}" class="navi-link">
                                             <span class="symbol symbol-20 mr-3">
@@ -558,7 +557,7 @@
                     </div>
                     <div class="navi-text">
                         <div class="font-weight-bold"> {{trans('lang.profile')}}</div>
-                        <div class="text-muted"> </div>
+                        <div class="text-muted"></div>
                     </div>
                 </div>
             </a>
@@ -765,8 +764,13 @@
 @yield('js')
 <!--end::Page Scripts -->
 
-@if(session()->has('success'))
+@if(session()->has('success') || session()->has('error') || session()->has('errors'))
 
+    <style>
+        #toast-container>.toast-success {
+            text-align: center;
+        }
+    </style>
 
     <script>
         jQuery(document).ready(function () {
@@ -774,8 +778,8 @@
                 "closeButton": false,
                 "debug": false,
                 "newestOnTop": false,
-                "progressBar": false,
-                "positionClass": "toast-top-right",
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
                 "preventDuplicates": false,
                 "onclick": null,
                 "showDuration": "300",
@@ -785,10 +789,19 @@
                 "showEasing": "swing",
                 "hideEasing": "linear",
                 "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
+                "hideMethod": "fadeOut",
+
             };
 
-            toastr.success("{!!  session()->get('success') !!}");
+            @if(session()->has('success'))
+            toastr.success("{{session()->get('success')}}");
+            @elseif(session()->has('error'))
+            toastr.error("{{session()->get('error')}}");
+            @else
+            @foreach($errors->all() as $session_error)
+            toastr.error("{{$session_error}}");
+            @endforeach
+            @endif
 
 
         });
