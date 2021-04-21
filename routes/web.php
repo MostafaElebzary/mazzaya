@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\ProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,13 @@ Route::group(['middleware' => 'Admin:admins'], function () {
     Route::get('admin/profile', [ProfileController::class, 'profile']);
     Route::post('admin/profile', [ProfileController::class, 'updateProfile'])->name('profile.custom');
 
+    Route::get('admin/admins', [AdminsController::class, 'index']);
+    Route::get('admin/admins/create', [AdminsController::class, 'create']);
+    Route::post('admin/admins/store', [AdminsController::class, 'store']);
+    Route::get('admin/admins/edit/{id}', [AdminsController::class, 'edit']);
+    Route::post('admin/admins/update', [AdminsController::class, 'update']);
+    Route::get('admin/admins/delete', [AdminsController::class, 'destroy']);
+
 
 });
 Route::group(['middleware'=>'guest'], function () {
@@ -43,10 +51,10 @@ Route::get('lang/{lang}', function ($lang) {
     if (session()->has('lang')) {
         session()->forget('lang');
     }
-    if ($lang == 'ar') {
-        session()->put('lang', 'ar');
-    } else {
+    if ($lang == 'en') {
         session()->put('lang', 'en');
+    } else {
+        session()->put('lang', 'ar');
     }
 
 

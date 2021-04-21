@@ -26,7 +26,7 @@ class ProfileController extends Controller
                 'name' => 'required',
                 'email' => 'required|unique:admins,email,' . $request->id,
                 'phone' => 'required|unique:admins,phone,' . $request->id,
-                'password' => 'nullable|image',
+                'password' => 'nullable',
                 'image' => 'nullable|image',
 
             ]);
