@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\ProfileController;
+use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -17,28 +18,35 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'Admin:admins'], function () {
-    Route::get('/admin', function () {
+Route::group(['middleware' => 'Admin:admins', 'prefix' => 'admin'], function () {
+    Route::get('/', function () {
         return view('Admin.index');
     });
-    Route::get('admin/logout', function () {
+    Route::get('/logout', function () {
         Auth::guard('admins')->logout();
         return back();
     });
 
-    Route::get('admin/profile', [ProfileController::class, 'profile']);
-    Route::post('admin/profile', [ProfileController::class, 'updateProfile'])->name('profile.custom');
+    Route::get('/profile', [ProfileController::class, 'profile']);
+    Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('profile.custom');
 
-    Route::get('admin/admins', [AdminsController::class, 'index']);
-    Route::get('admin/admins/create', [AdminsController::class, 'create']);
-    Route::post('admin/admins/store', [AdminsController::class, 'store']);
-    Route::get('admin/admins/edit/{id}', [AdminsController::class, 'edit']);
-    Route::post('admin/admins/update', [AdminsController::class, 'update']);
-    Route::get('admin/admins/delete', [AdminsController::class, 'destroy']);
+//    admins
+    Route::get('/admins', [AdminsController::class, 'index']);
+    Route::get('/admins/create', [AdminsController::class, 'create']);
+    Route::post('/admins/store', [AdminsController::class, 'store']);
+    Route::get('/admins/edit/{id}', [AdminsController::class, 'edit']);
+    Route::post('/admins/update', [AdminsController::class, 'update']);
+    Route::get('/admins/delete', [AdminsController::class, 'destroy']);
 
+//    users
+    Route::get('/users', [UsersController::class, 'index']);
+    Route::get('/users/edit/{id}', [UsersController::class, 'edit']);
+    Route::post('/users/update', [UsersController::class, 'update']);
+    Route::get('/users/delete', [UsersController::class, 'destroy']);
 
 });
-Route::group(['middleware'=>'guest'], function () {
+
+Route::group(['middleware' => 'guest'], function () {
     // Login Routes
     Route::get('admin/login', [LoginController::class, 'renderLogin']);
     Route::post('admin/login', [LoginController::class, 'login'])->name('login.custom');

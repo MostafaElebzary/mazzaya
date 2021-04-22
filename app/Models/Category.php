@@ -15,6 +15,14 @@ class Category extends Model
     ];
     protected $appends = ['title'];
 
+    public function getTitleAttribute()
+    {
+        if ($locale = App::currentLocale() == "ar") {
+            return $this->title_ar;
+        } else {
+            return $this->title_en;
+        }
+    }
     public function getIconAttribute($image)
     {
         if (!empty($image)){
@@ -48,14 +56,6 @@ class Category extends Model
     }
 
 
-    public function getTitleAttribute()
-    {
-        if ($locale = App::currentLocale() == "ar") {
-            return $this->title_ar;
-        } else {
-            return $this->title_en;
-        }
-    }
 
     public function ParentCategory()
     {

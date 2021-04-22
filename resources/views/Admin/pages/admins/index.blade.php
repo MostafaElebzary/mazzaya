@@ -18,11 +18,11 @@
 
         $("body").on("click", "#delete", function () {
             var dataList = [];
-            dataList = $("#kt_datatable input:checkbox:checked").map(function(){
+            dataList = $("#kt_datatable input:checkbox:checked").map(function () {
                 return $(this).val();
             }).get();
 
-            if(dataList.length >0){
+            if (dataList.length > 0) {
                 Swal.fire({
                     title: "{{__('lang.delete_warrning')}}",
                     text: "",
@@ -37,24 +37,23 @@
                     if (result.value) {
                         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                         $.ajax({
-                            url:'{{url("admin/admins/delete")}}',
-                            type:"get",
-                            data:{'id':dataList,_token: CSRF_TOKEN},
-                            dataType:"JSON",
+                            url: '{{url("admin/admins/delete")}}',
+                            type: "get",
+                            data: {'id': dataList, _token: CSRF_TOKEN},
+                            dataType: "JSON",
                             success: function (data) {
-                                if(data.message == "Success")
-                                {
+                                if (data.message == "Success") {
                                     $("#kt_datatable .selected").hide();
 
                                     $('#delete').text("{{__('lang.deleted_successfully')}}");
 
                                     Swal.fire("{{__('lang.Success')}}", "{{__('lang.deleted_successfully')}}", "success");
                                     location.reload();
-                                }else{
+                                } else {
                                     Swal.fire("{{__('lang.Sorry')}}", "{{__('lang.Message_Fail_Delete')}}", "error");
                                 }
                             },
-                            fail: function(xhrerrorThrown){
+                            fail: function (xhrerrorThrown) {
                                 Swal.fire("{{__('lang.Sorry')}}", "{{__('lang.Message_Fail_Delete')}}", "error");
                             }
                         });
@@ -71,26 +70,26 @@
 @endsection
 @section('content')
 
-        <!--begin::Container-->
-        <div class="container">
-            <br>
-            <br>
-            <br>
-            <!--begin::Card-->
-            <div class="card card-custom gutter-b">
-                <div class="card-header flex-wrap py-3">
-                    <div class="card-title">
-                        <h3 class="card-label">
-                        {{$data['title']}}
-                    </div>
-
+    <!--begin::Container-->
+    <div class="container">
+        <br>
+        <br>
+        <br>
+        <!--begin::Card-->
+        <div class="card card-custom gutter-b">
+            <div class="card-header flex-wrap py-3">
+                <div class="card-title">
+                    <h3 class="card-label">
+                    {{$data['title']}}
                 </div>
-                <div class="card-header flex-wrap py-3">
 
-                    <div class="card-toolbar">
-                        <!--begin::Button-->
-                        <a  href="{{url('admin/admins/create')}}"
-                                class="btn btn-primary font-weight-bolder">
+            </div>
+            <div class="card-header flex-wrap py-3">
+
+                <div class="card-toolbar">
+                    <!--begin::Button-->
+                    <a href="{{url('admin/admins/create')}}"
+                       class="btn btn-primary font-weight-bolder">
           <span class="svg-icon svg-icon-md">
             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -105,11 +104,11 @@
             </svg>
               <!--end::Svg Icon-->
           </span> {{__('lang.create')}}</a>
-                        &nbsp;&nbsp;
-                        <button id="delete" class="btn btn-danger font-weight-bolder"><span
-                                class="svg-icon svg-icon-md"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\General\Trash.svg--><svg
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                    &nbsp;&nbsp;
+                    <button id="delete" class="btn btn-danger font-weight-bolder"><span
+                            class="svg-icon svg-icon-md"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\General\Trash.svg--><svg
+                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <rect x="0" y="0" width="24" height="24"/>
                   <circle fill="#000000" opacity="0.3" cx="12" cy="12" r="10"/>
@@ -118,67 +117,70 @@
                       fill="#000000"/>
               </g>
           </svg><!--end::Svg Icon--></span>
-                            {{__('lang.delete')}}</button>
-                        <!--end::Button-->
-                    </div>
-                </div>
-                <div class="card-body">
-
-                    <h3> {{$data['title']}}</h3>
-
-
-                    <!--begin: Datatable-->
-                    <table class="table table-bordered table-hover table-checkable mt-10" id="kt_datatable">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>{{__('lang.name')}} </th>
-                            <th>{{__('lang.email')}} </th>
-                             <th> {{__('lang.actions')}} </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($admins as $User)
-                            <tr>
-                                <td>
-                                    <label class="checkbox checkbox-single">
-                                        <input type="checkbox" value="{{$User->id}}" class="checkable" name="check_delete[]"/>
-                                        <span></span>
-                                    </label>
-                                </td>
-                                <td>
-                                    <div class="kt-user-card-v2">
-                                        <div class="kt-user-card-v2__details">
-                                            <span class="kt-user-card-v2__name"></span>
-                                            {{$User->name}}
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="kt-user-card-v2">
-                                        <div class="kt-user-card-v2__details">
-                                            <span class="kt-user-card-v2__name"></span>
-                                            {{$User->email}}
-                                        </div>
-                                    </div>
-                                </td>
-
-                                <td nowrap="nowrap">
-                                    <a  class="btn btn-icon btn-success btn-sm btn-clean btn-icon btn-icon-md edit-Advert"
-                                       href="{{url('admin/admins/edit/'.$User->id)}}">
-                                        <i class="flaticon-edit icon-nm"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                    <!--end: Datatable-->
-                    {{$admins->links()}}
-
+                        {{__('lang.delete')}}</button>
+                    <!--end::Button-->
                 </div>
             </div>
-            <!--end::Card-->
+            <div class="card-body">
+
+                <h3> {{$data['title']}}</h3>
+
+
+                <!--begin: Datatable-->
+                <table class="table table-bordered table-hover table-checkable mt-10" id="kt_datatable">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{{__('lang.name')}} </th>
+                        <th>{{__('lang.email')}} </th>
+                        <th> {{__('lang.actions')}} </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($admins as $User)
+                        <tr>
+                            <td>
+                                @if($User->id != 1)
+                                    <label class="checkbox checkbox-single">
+                                        <input type="checkbox" value="{{$User->id}}" class="checkable"
+                                               name="check_delete[]"/>
+                                        <span></span>
+                                    </label>
+                                @endif
+                            </td>
+                            <td>
+                                <div class="kt-user-card-v2">
+                                    <div class="kt-user-card-v2__details">
+                                        <span class="kt-user-card-v2__name"></span>
+                                        {{$User->name}}
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="kt-user-card-v2">
+                                    <div class="kt-user-card-v2__details">
+                                        <span class="kt-user-card-v2__name"></span>
+                                        {{$User->email}}
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td nowrap="nowrap">
+                                <a class="btn btn-icon btn-success btn-sm btn-clean btn-icon btn-icon-md edit-Advert"
+                                   href="{{url('admin/admins/edit/'.$User->id)}}">
+                                    <i class="flaticon-edit icon-nm"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+                <!--end: Datatable-->
+                {{$admins->links()}}
+
+            </div>
         </div>
-        <!--end::Container-->
+        <!--end::Card-->
+    </div>
+    <!--end::Container-->
 @endsection

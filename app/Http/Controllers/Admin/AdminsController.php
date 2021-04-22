@@ -16,7 +16,7 @@ class AdminsController extends Controller
     public function index()
     {
         $data['title'] = trans('lang.admins');
-        $admins = Admin::OrderBy('id', 'desc')->paginate(10);
+        $admins = Admin::OrderBy('id', 'asc')->paginate(10);
         return view('Admin.pages.admins.index', compact('admins', 'data'));
     }
 

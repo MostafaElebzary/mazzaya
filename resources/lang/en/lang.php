@@ -39,6 +39,9 @@ return [
     'status' => 'status',
     'active' => 'active',
     'not_active' => 'not active',
+    'users' => 'users',
+    'NumOrders' => 'Num OF Orders',
+    'user_edit' => 'user edit',
 
 
 

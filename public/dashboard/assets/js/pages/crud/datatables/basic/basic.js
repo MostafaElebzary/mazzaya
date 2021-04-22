@@ -7,7 +7,7 @@ var KTDatatablesBasicBasic = function() {
 		// begin first table
 		table.DataTable({
 			responsive: true,
-
+            searching: true,
 			// DOM Layout settings
 			dom: `<'row'<'col-sm-12'tr>>
 			<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
@@ -252,6 +252,7 @@ var KTDatatablesBasicBasic = function() {
 		// begin first table
 		table.DataTable({
 			responsive: true,
+            searching: true,
 			// DOM Layout settings
 			dom: `<'row'<'col-sm-12'tr>>
 			<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
@@ -304,6 +305,7 @@ var KTDatatablesBasicBasic = function() {
 		table.DataTable({
 			responsive: true,
 			paging: true,
+            searching: true,
 
 
 			columnDefs: [
