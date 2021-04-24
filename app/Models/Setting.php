@@ -23,6 +23,22 @@ class Setting extends Model
 
     protected $appends = ['title', 'address1', 'address2'];
 
+    public function getBreadcrumbAttribute($image)
+    {
+        if (!empty($image)){
+            return asset('uploads/settings').'/'.$image;
+        }
+        return "default.jpg";
+    }
+
+    public function setBreadcrumbAttribute($image)
+    {
+        if (is_file($image)) {
+            $imageFields = upload($image, 'settings');
+            $this->attributes['breadcrumb'] = $imageFields;
+        }
+    }
+
     public function getFavIcoAttribute($image)
     {
         if (!empty($image)){

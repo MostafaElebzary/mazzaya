@@ -44,4 +44,40 @@ return [
     'users' => 'المستخدمين',
     'user_edit' => 'تغيير الحاله',
     'NumOrders' => 'عدد طلبات المستخدم',
+
+    'keywords' => 'keywords',
+    'description' => 'الوصف',
+    'author' => 'المؤلف',
+    'site_map_link' => 'site map link',
+    'google_analytics' => 'google analytics',
+
+
+    'settings' => 'الاعدادات ',
+
+    'main_data' => 'البيانات الاساسية',
+    'contacts' => 'بيانات التواصل',
+    'images' => 'الصور',
+    'title_ar' => 'عنوان الموقع بالعربية',
+    'title_en' => 'عنوان الموقع بالانجليزية',
+    'facebook' => 'facebook',
+    'twitter' => 'twitter',
+    'youtube' => 'youtube',
+    'snapchat' => 'snapchat',
+    'instagram' => 'instagram',
+    'linkedin' => 'linkedin',
+    'systemTimeZone' => 'المنطقة الزمنية الخاصة بالنظام',
+    'phone1' => 'رقم الجوال الاول',
+    'phone2' => 'رقم الجوال الثاني',
+    'email1' => 'البريد الاليكترونى الاول',
+    'email2' => 'البريد الاليكترونى الثاني',
+    'address1_ar' => 'العنوان الاول بالعربية',
+    'address1_en' => 'العنوان الاول بالانجليزية',
+    'address2_ar' => 'العنوان الثاني بالعربية',
+    'address2_en' => 'العنوان الثاني بالانجليزية',
+    'logo_white' => 'شعار الموقع على خلفية بيضاء',
+    'logo_black' => 'شعار الموقع على خلفية سوداء',
+    'fav_ico' => 'fav ico',
+    'breadcrumb' => 'breadcrumb',
+
+
 ];

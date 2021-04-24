@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\ProfileController;
+use App\Http\Controllers\Admin\GlobalSEOController;
+use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +32,10 @@ Route::group(['middleware' => 'Admin:admins', 'prefix' => 'admin'], function () 
     Route::get('/profile', [ProfileController::class, 'profile']);
     Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('profile.custom');
 
+
+    Route::get('/global-seo', [GlobalSEOController::class, 'index']);
+    Route::post('/global-seo', [GlobalSEOController::class, 'update'])->name('global.seo');
+
 //    admins
     Route::get('/admins', [AdminsController::class, 'index']);
     Route::get('/admins/create', [AdminsController::class, 'create']);
@@ -40,9 +46,16 @@ Route::group(['middleware' => 'Admin:admins', 'prefix' => 'admin'], function () 
 
 //    users
     Route::get('/users', [UsersController::class, 'index']);
+    Route::get('/users/create', [UsersController::class, 'create']);
+    Route::post('/users/store', [UsersController::class, 'store']);
     Route::get('/users/edit/{id}', [UsersController::class, 'edit']);
     Route::post('/users/update', [UsersController::class, 'update']);
     Route::get('/users/delete', [UsersController::class, 'destroy']);
+
+    Route::get('/settings', [SettingsController::class, 'index']);
+    Route::post('/settings', [SettingsController::class, 'update'])->name('settings.update');
+
+
 
 });
 

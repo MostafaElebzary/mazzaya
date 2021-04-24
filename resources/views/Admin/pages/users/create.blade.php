@@ -18,15 +18,13 @@
             <!--begin::Details-->
             <div class="d-flex align-items-center flex-wrap mr-2">
                 <!--begin::Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">{{trans('lang.profile')}}</h5>
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">{{trans('lang.admin_create')}}</h5>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
                 <!--end::Separator-->
                 <!--begin::Search Form-->
-                <div class="d-flex align-items-center" id="kt_subheader_search">
-                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">{{$admin->name}}</span>
-                </div>
+
                 <!--end::Search Form-->
             </div>
             <!--end::Details-->
@@ -69,7 +67,7 @@
                                                                 <!--end::Svg Icon-->
 															</span>
 														</span>
-                                    <span class="nav-text font-size-lg">{{trans('lang.profile')}}</span>
+                                    <span class="nav-text font-size-lg">{{trans('lang.admin_create')}}</span>
                                 </a>
                             </li>
 
@@ -81,7 +79,7 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body">
-                    <form action="{{route('profile.custom')}}" method="post" class="form" id="kt_form" enctype="multipart/form-data">
+                    <form action="{{url('admin/users/store')}}" method="post" class="form" id="kt_form" enctype="multipart/form-data">
                         @csrf
                         <div class="tab-content">
                             <!--begin::Tab-->
@@ -94,7 +92,7 @@
                                         <div class="row">
                                             <label class="col-3"></label>
                                             <div class="col-9">
-                                                <h6 class="text-dark font-weight-bold mb-10">{{trans('lang.customerInfo')}}</h6>
+                                                <h6 class="text-dark font-weight-bold mb-10">{{trans('lang.admin_info')}}</h6>
                                             </div>
                                         </div>
                                         <!--end::Row-->
@@ -102,7 +100,7 @@
                                         <div class="form-group row">
                                             <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.image')}}</label>
                                             <div class="col-9">
-                                                <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar" style="background-image: url({{$admin->image}})">
+                                                <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar" style="background-image: url()">
                                                     <div class="image-input-wrapper"></div>
                                                     <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
                                                         <i class="fa fa-pen icon-sm text-muted"></i>
@@ -123,16 +121,15 @@
                                         <div class="form-group row"  >
                                             <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.name')}}</label>
                                             <div class="col-9">
-                                                <input name="name" class="form-control form-control-lg form-control-solid" type="text" value="{{$admin->name}}" required/>
-                                                <input name="id" class="form-control form-control-lg form-control-solid" type="hidden" value="{{$admin->id}}" required/>
-                                            </div>
+                                                <input name="name" class="form-control form-control-lg form-control-solid" type="text" value="{{old('name')}}" required/>
+                                             </div>
                                         </div>
                                         <!--end::Group-->
                                         <!--begin::Group-->
                                         <div class="form-group row">
                                             <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.email')}}</label>
                                             <div class="col-9">
-                                                <input name="email" class="form-control form-control-lg form-control-solid" type="email" value="{{$admin->email}}" required/>
+                                                <input name="email" class="form-control form-control-lg form-control-solid" type="email" value="{{old('email')}}" required/>
                                             </div>
                                         </div>
                                         <!--end::Group-->
@@ -140,7 +137,7 @@
                                         <div class="form-group row">
                                             <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.phone')}}  </label>
                                             <div class="col-9">
-                                                <input name="phone" class="form-control form-control-lg form-control-solid" type="number" value="{{$admin->phone}}" required />
+                                                <input name="phone" class="form-control form-control-lg form-control-solid" type="numeric" value="{{old('phone')}}" required />
                                              </div>
                                         </div>
                                         <!--end::Group-->
@@ -148,7 +145,7 @@
                                         <div class="form-group row">
                                             <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.password')}}  </label>
                                             <div class="col-9">
-                                                <input name="password" class="form-control form-control-lg form-control-solid" type="password" />
+                                                <input name="password" class="form-control form-control-lg form-control-solid" type="password" required/>
                                             </div>
                                         </div>
                                         <div class="form-group row">

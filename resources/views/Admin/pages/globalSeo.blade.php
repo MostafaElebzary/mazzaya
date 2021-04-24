@@ -18,14 +18,14 @@
             <!--begin::Details-->
             <div class="d-flex align-items-center flex-wrap mr-2">
                 <!--begin::Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">{{trans('lang.profile')}}</h5>
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">{{$data['title']}}</h5>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
                 <!--end::Separator-->
                 <!--begin::Search Form-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">{{$admin->name}}</span>
+                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total"> </span>
                 </div>
                 <!--end::Search Form-->
             </div>
@@ -69,7 +69,7 @@
                                                                 <!--end::Svg Icon-->
 															</span>
 														</span>
-                                    <span class="nav-text font-size-lg">{{trans('lang.profile')}}</span>
+                                    <span class="nav-text font-size-lg">{{$data['title'] }}</span>
                                 </a>
                             </li>
 
@@ -81,7 +81,7 @@
                 <!--end::Card header-->
                 <!--begin::Card body-->
                 <div class="card-body">
-                    <form action="{{route('profile.custom')}}" method="post" class="form" id="kt_form" enctype="multipart/form-data">
+                    <form action="{{route('global.seo')}}" method="post" class="form" id="kt_form" enctype="multipart/form-data">
                         @csrf
                         <div class="tab-content">
                             <!--begin::Tab-->
@@ -94,63 +94,55 @@
                                         <div class="row">
                                             <label class="col-3"></label>
                                             <div class="col-9">
-                                                <h6 class="text-dark font-weight-bold mb-10">{{trans('lang.customerInfo')}}</h6>
+                                                <h6 class="text-dark font-weight-bold mb-10">{{ $data['title']}}</h6>
                                             </div>
                                         </div>
                                         <!--end::Row-->
-                                        <!--begin::Group-->
-                                        <div class="form-group row">
-                                            <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.image')}}</label>
-                                            <div class="col-9">
-                                                <div class="image-input image-input-empty image-input-outline" id="kt_user_edit_avatar" style="background-image: url({{$admin->image}})">
-                                                    <div class="image-input-wrapper"></div>
-                                                    <label class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="change" data-toggle="tooltip" title="" data-original-title="Change avatar">
-                                                        <i class="fa fa-pen icon-sm text-muted"></i>
-                                                        <input type="file" name="image" accept=".png, .jpg, .jpeg" />
-                                                        <input type="hidden" name="profile_avatar_remove" />
-                                                    </label>
-                                                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="cancel" data-toggle="tooltip" title="Cancel avatar">
-																			<i class="ki ki-bold-close icon-xs text-muted"></i>
-																		</span>
-                                                    <span class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow" data-action="remove" data-toggle="tooltip" title="Remove avatar">
-																			<i class="ki ki-bold-close icon-xs text-muted"></i>
-																		</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--end::Group-->
+
+
                                         <!--begin::Group-->
                                         <div class="form-group row"  >
-                                            <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.name')}}</label>
+                                            <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.keywords')}}</label>
                                             <div class="col-9">
-                                                <input name="name" class="form-control form-control-lg form-control-solid" type="text" value="{{$admin->name}}" required/>
-                                                <input name="id" class="form-control form-control-lg form-control-solid" type="hidden" value="{{$admin->id}}" required/>
+                                                <input name="keywords" class="form-control form-control-lg form-control-solid" type="text" value="{{$global_seo->keywords}}" required/>
+                                                <input name="id" class="form-control form-control-lg form-control-solid" type="hidden" value="{{$global_seo->id}}" required/>
                                             </div>
                                         </div>
                                         <!--end::Group-->
                                         <!--begin::Group-->
                                         <div class="form-group row">
-                                            <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.email')}}</label>
+                                            <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.description')}}</label>
                                             <div class="col-9">
-                                                <input name="email" class="form-control form-control-lg form-control-solid" type="email" value="{{$admin->email}}" required/>
+                                                <input name="description" class="form-control form-control-lg form-control-solid" type="text" value="{{$global_seo->description}}" required/>
                                             </div>
                                         </div>
                                         <!--end::Group-->
                                         <!--begin::Group-->
                                         <div class="form-group row">
-                                            <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.phone')}}  </label>
+                                            <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.author')}}  </label>
                                             <div class="col-9">
-                                                <input name="phone" class="form-control form-control-lg form-control-solid" type="number" value="{{$admin->phone}}" required />
+                                                <input name="author" class="form-control form-control-lg form-control-solid" type="text" value="{{$global_seo->author}}" required />
                                              </div>
                                         </div>
                                         <!--end::Group-->
                                         <!--begin::Group-->
                                         <div class="form-group row">
-                                            <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.password')}}  </label>
+                                            <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.site_map_link')}}  </label>
                                             <div class="col-9">
-                                                <input name="password" class="form-control form-control-lg form-control-solid" type="password" />
+                                                <input name="site_map_link" class="form-control form-control-lg form-control-solid" type="text" value="{{$global_seo->site_map_link}}" required />
                                             </div>
                                         </div>
+                                        <!--end::Group-->
+                                         <!--begin::Group-->
+                                        <div class="form-group row">
+                                            <label class="col-form-label col-3 text-lg-right text-left">{{trans('lang.google_analytics')}}  </label>
+                                            <div class="col-9">
+                                                <input name="google_analytics" class="form-control form-control-lg form-control-solid" type="text" value="{{$global_seo->google_analytics}}"  />
+                                            </div>
+                                        </div>
+                                        <!--end::Group-->
+
+
                                         <div class="form-group row">
                                              <div class="col-12" style="text-align: center">
                                                  <button type="submit" class="btn btn-primary font-weight-bold btn-sm px-3 font-size-base">{{trans('lang.save')}}</button>

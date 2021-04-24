@@ -28,7 +28,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $data['title'] = trans('lang.admin_create');
+        return view('Admin.pages.users.create', compact('data'));
     }
 
     /**
@@ -39,7 +40,19 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->validate(\request(),
+            [
+                'name' => 'required',
+                'email' => 'required|unique:admins,email',
+                'phone' => 'required|unique:admins,phone',
+                'password' => 'required',
+                'image' => 'required|image',
+
+            ]);
+
+        $admin = User::create($data);
+        session()->flash('success', trans('lang.added_successfully'));
+        return redirect('admin/users');
     }
 
     /**
@@ -78,12 +91,28 @@ class UsersController extends Controller
     {
         $data = $this->validate(\request(),
             [
+                'name' => 'required',
                 'is_active' => 'required|in:0,1',
+                'email' => 'required|unique:admins,email,' . $request->id,
+                'phone' => 'required|unique:admins,phone,' . $request->id,
+                'password' => 'nullable',
+                'image' => 'nullable|image',
             ]);
 
 
         $user = User::where('id', $request->id)->first();
         $user->is_active = $request->is_active;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+         if ($request->password != null) {
+            $user->password = $request->password;
+
+        }
+        if ($request->image != null) {
+            $user->image = $request->image;
+
+        }
         $user->save();
 
         session()->flash('success', trans('lang.updated_successfully'));

@@ -145,7 +145,7 @@
                                             <div class="col-9">
                                                 <input name="name"
                                                        class="form-control form-control-lg form-control-solid"
-                                                       type="text" value="{{$admin->name}}" readonly/>
+                                                       type="text" value="{{$admin->name}}" />
                                                 <input name="id" class="form-control form-control-lg form-control-solid"
                                                        type="hidden" value="{{$admin->id}}" required/>
                                             </div>
@@ -158,7 +158,7 @@
                                             <div class="col-9">
                                                 <input name="email"
                                                        class="form-control form-control-lg form-control-solid"
-                                                       type="email" value="{{$admin->email}}" readonly/>
+                                                       type="email" value="{{$admin->email}}" />
                                             </div>
                                         </div>
                                         <!--end::Group-->
@@ -169,7 +169,7 @@
                                             <div class="col-9">
                                                 <input name="phone"
                                                        class="form-control form-control-lg form-control-solid"
-                                                       type="numeric" value="{{$admin->phone}}" readonly/>
+                                                       type="numeric" value="{{$admin->phone}}" />
                                             </div>
                                         </div>
                                         <!--end::Group-->
